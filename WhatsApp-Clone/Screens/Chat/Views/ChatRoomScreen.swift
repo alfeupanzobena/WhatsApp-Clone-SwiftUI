@@ -9,10 +9,53 @@ import SwiftUI
 
 struct ChatRoomScreen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        MessageListView()
+        .toolbar(.hidden, for: .tabBar)
+        .toolbar {
+            leadingNavItems()
+            trailingNavItems()
+        }
+        .safeAreaInset(edge: .bottom){
+            TextInputArea()
+        }
     }
 }
 
+// MARK: Toolbar Items
+extension ChatRoomScreen {
+     @ToolbarContentBuilder
+     private func leadingNavItems() -> some ToolbarContent {
+         ToolbarItem(placement: .topBarLeading) {
+             HStack {
+                 Circle()
+                     .frame(width: 35, height: 35)
+                 
+                 Text("Alfeu")
+                     .bold()
+            }
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private func trailingNavItems() -> some ToolbarContent {
+        ToolbarItemGroup(placement: .topBarTrailing) {
+            Button {
+                
+            } label: {
+                Image(systemName: "video")
+            }
+            
+            Button {
+                
+            } label: {
+                Image(systemName: "phone")
+            }
+       }
+   }
+}
+
 #Preview {
-    ChatRoomScreen()
+    NavigationStack {
+        ChatRoomScreen()
+    }
 }
